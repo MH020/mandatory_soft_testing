@@ -1,7 +1,3 @@
-CREATE DATABASE addresses
-    WITH ENCODING = 'UTF8';
-connect addresses;
-
 BEGIN;
 
 DROP TABLE IF EXISTS postal_code;
@@ -631,23 +627,24 @@ INSERT INTO postal_code ("cPostalCode", "cTownName") VALUES
 ('9981', 'Jerup'),
 ('9982', 'Aalbæk'),
 ('9990', 'Skagen');
-COMMIT;
-
--- Total number of postal codes
-SELECT COUNT(*) AS total_postal_codes
-FROM postal_code;
-
--- Inspect the first 20 rows
-SELECT "cPostalCode", "cTownName"
-FROM postal_code
-ORDER BY "cPostalCode"
-LIMIT 20;
-
--- Check for duplicate postal codes
-SELECT "cPostalCode", COUNT(*)
-FROM postal_code
-GROUP BY "cPostalCode"
-HAVING COUNT(*) > 1;
 
 -- Execute the stored procedure
 CALL "RemoveDuplicates"();
+
+COMMIT;
+
+-- -- Total number of postal codes
+-- SELECT COUNT(*) AS total_postal_codes
+-- FROM postal_code;
+
+-- -- Inspect the first 20 rows
+-- SELECT "cPostalCode", "cTownName"
+-- FROM postal_code
+-- ORDER BY "cPostalCode"
+-- LIMIT 20;
+
+-- -- Check for duplicate postal codes
+-- SELECT "cPostalCode", COUNT(*)
+-- FROM postal_code
+-- GROUP BY "cPostalCode"
+-- HAVING COUNT(*) > 1;
