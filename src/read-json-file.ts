@@ -1,18 +1,25 @@
-import fs from 'fs';
+import fs, { read } from 'fs';
+import path from 'path'
+import {fileURLToPath} from 'url';
 
+
+const __filename = fileURLToPath(import.meta.url);
+
+const filePath = path.join(__filename, '/../../../data/person.json');
 
 function readFile() {
-  const dirContents = fs.readdirSync(__dirname);
-  console.log(dirContents);
+    try { 
+        const data = fs.readFileSync(filePath, "utf8")
+        console.log(data)
+        const jsonData = JSON.parse(data)
+        return jsonData
 
-  const fileContents = fs.readFileSync(
-    path.join(__dirname, 'another-file.ts'),
-    {
-      encoding: 'utf-8',
-    },
-  );
-
-  console.log(fileContents);
+    } catch (error) {
+    console.error('Error reading JSON file:', error);   
+    }
 }
 
 
+console.log(readFile())
+
+export default readFile
