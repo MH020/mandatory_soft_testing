@@ -1,7 +1,6 @@
 # Introduction
 
 
-
 # Prerequisites
 * docker compose 
 * Node >=20.0.0 
@@ -24,7 +23,13 @@
 **Backend API:** http://localhost:8080/api/**
 
 # Testing:
-```$ npm e2e``` : End to end tests with playwright. HTML report at http://localhost:9323. 
+## End to end
+We use Playwright for end to end tests. Specs are found in /e2e
+
+Test: ```$ npx playwright test``` \
+HTML report: ```$ npx playwright show-report``` (http://localhost:9323.)
+
+## Unit testing
 
 ```$npm test```: 
 
