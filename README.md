@@ -27,7 +27,17 @@
 We use Playwright for end to end tests. Specs are found in /e2e
 
 Test: ```$ npx playwright test``` \
+Test with UI: ```$ npx playwright test --ui``` \
 HTML report: ```$ npx playwright show-report``` (http://localhost:9323.)
+
+### Writing Playwright tests
+Assertions: https://playwright.dev/docs/writing-tests#assertions \
+Before each: https://playwright.dev/docs/writing-tests#using-test-hooks
+
+Generate tests: 
+```$ npx playwright codegen [url]``` \
+https://playwright.dev/docs/codegen-intro#emulation
+
 
 ## Unit testing
 
