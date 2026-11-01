@@ -15,3 +15,7 @@ Create a `.env` file and add the following line to it:
 ```bash
 $ npx drizzle-kit migrate
 ```
+**To run jest tests:**
+   ```bash
+   $ npx jest
+   ```
