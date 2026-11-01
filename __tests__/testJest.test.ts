@@ -1,4 +1,4 @@
-
+import { describe, expect, jest, test } from '@jest/globals';
 
 describe('Math functions', () => {
   test('add function correctly adds two numbers', () => {
