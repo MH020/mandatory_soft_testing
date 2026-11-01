@@ -10,7 +10,6 @@ const filePath = path.join(__filename, '/../../../data/person.json');
 function readFile() {
     try { 
         const data = fs.readFileSync(filePath, "utf8")
-        console.log(data)
         const jsonData = JSON.parse(data)
         return jsonData
 
@@ -18,8 +17,5 @@ function readFile() {
     console.error('Error reading JSON file:', error);   
     }
 }
-
-
-console.log(readFile())
 
 export default readFile
