@@ -1,4 +1,4 @@
-import { describe, expect, jest, test } from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 import readFile from '../src/read-json-file.js';
 
 
@@ -11,7 +11,7 @@ describe('reading file test', () => {
   test('reading content test returns a non-empty array', () => {
     expect(readFile().persons.length).toBeGreaterThan(0);
   });
-  
+
   test('each person has the expected fields', () => {
     const { persons } = readFile();
 

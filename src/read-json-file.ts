@@ -1,9 +1,6 @@
-import fs, { read } from 'fs';
+import fs from 'fs';
 import path from 'path'
-import {fileURLToPath} from 'url';
 
-
-const __filename = fileURLToPath(import.meta.url);
 
 const filePath = path.resolve(process.cwd(), 'data/person.json');
 
