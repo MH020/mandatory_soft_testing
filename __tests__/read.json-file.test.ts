@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import readFile from '../src/read-json-file.js';
+import readFile from '../public/people-Repository/read-json-file.js';
 
 
 

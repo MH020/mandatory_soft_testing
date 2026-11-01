@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path'
-import type { people } from './dtos/person-dto.js';
+import type { people } from '../../src/dtos/person-dto.js';
 
 const filePath = path.resolve(process.cwd(), 'data/person.json');
 
