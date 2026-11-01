@@ -1,18 +1,13 @@
 import fs from 'fs';
 import path from 'path'
-
+import type { people } from './dtos/person-dto.js';
 
 const filePath = path.resolve(process.cwd(), 'data/person.json');
 
 function readFile() {
-    try { 
-        const data = fs.readFileSync(filePath, "utf8")
-        const jsonData = JSON.parse(data)
-        return jsonData
-
-    } catch (error) {
-    console.error('Error reading JSON file:', error);   
-    }
+    const data = fs.readFileSync(filePath, "utf8")
+    const people = JSON.parse(data) as people
+    return people
 }
 
 export default readFile
