@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import readFile from '../src/read-json-file';
+import readFile from '../src/read-json-file.js';
 
 
 
@@ -8,3 +8,4 @@ describe('reading file test', () => {
     expect(() => readFile()).not.toThrow();
   });
 });
+
