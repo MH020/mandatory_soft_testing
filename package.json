@@ -25,6 +25,7 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@eslint/js": "^10.0.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
