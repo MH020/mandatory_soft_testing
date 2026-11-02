@@ -14,6 +14,9 @@
 ## Setup
 .env file \
 ```$ npm install``` \
+to fix mege conflicts with package you can just reinstall it: 
+```$ npm install --package-lock-only```
+
 ``` $ docker compose up -d ``` \
 ``` $ npx drizzle-kit migrate ```
 
