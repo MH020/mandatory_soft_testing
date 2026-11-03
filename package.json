@@ -17,7 +17,7 @@
   "scripts": {
     "start": "tsc && node ./dist/src/app.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "npx eslint"
+    "eslint": "npx eslint"
   },
   "dependencies": {
     "cors": "^2.8.6",

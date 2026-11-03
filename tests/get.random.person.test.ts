@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import type { person } from '../src/dtos/person-dto.js';
 import { get_random_person } from '../src/service/person-service.js';
 
@@ -43,6 +43,12 @@ describe("get_random_person", () => {
     jest.spyOn(Math, "random").mockReturnValue(0.9999);
 
     expect(get_random_person(people)).toBe(people[2]);
+  });
+
+  it("returns undefined for an empty list", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.5);
+    
+    expect(get_random_person([])).toBeUndefined();
   });
 
 });
