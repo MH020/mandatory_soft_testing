@@ -8,6 +8,7 @@ const config: Config = {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
+  testPathIgnorePatterns: ["<rootDir>/e2e/"],
 };
 
 export default config;
