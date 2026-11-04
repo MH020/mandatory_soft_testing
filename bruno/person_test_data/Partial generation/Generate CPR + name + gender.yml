@@ -1,7 +1,7 @@
 info:
   name: Generate CPR + name + gender
   type: http
-  seq: 5
+  seq: 4
 
 http:
   method: GET
