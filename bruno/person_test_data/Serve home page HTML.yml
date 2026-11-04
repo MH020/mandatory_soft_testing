@@ -1,5 +1,5 @@
 info:
-  name: API test demo
+  name: Serve home page HTML
   type: http
   seq: 1
 

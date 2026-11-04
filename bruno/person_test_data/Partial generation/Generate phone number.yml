@@ -1,0 +1,16 @@
+info:
+  name: Generate phone number
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: "{{SERVER}}/api/phone"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

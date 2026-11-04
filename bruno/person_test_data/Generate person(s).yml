@@ -1,0 +1,20 @@
+info:
+  name: Generate person(s)
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{SERVER}}/api/person/?n=amount"
+  params:
+    - name: n
+      value: amount
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
