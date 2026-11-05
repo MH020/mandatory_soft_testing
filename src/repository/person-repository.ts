@@ -1,11 +1,9 @@
 import fs from 'fs';
 import path from 'path'
 import type { people } from '../dtos/person-dto.js';
-import { JsonableValue } from 'ts-jest';
-import { json } from 'stream/consumers';
 
 const filePath = path.resolve(process.cwd(), 'data/person.json');
-const start = Date.UTC(1868, 0, 1);
+
 
 
 export function readFile() {
@@ -14,7 +12,7 @@ export function readFile() {
     return people
 }
 
-
+const start = Date.UTC(1868, 0, 1);
 
 export function createRandomDateOfBirth() {
     const now = new Date(); 
