@@ -1,4 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
+import { getRandomPhoneNumber } from '../service/person-service.js';
 
 const router: Express = express();
 
@@ -40,8 +41,8 @@ router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
 
 
 router.get('/phone', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    const phoneNumber = getRandomPhoneNumber();
+    res.send(phoneNumber);
 });
 
 
