@@ -1,9 +1,9 @@
 import express, { type Express, type Request, type Response } from 'express';
+import generateCprNumberFromDobAndGender from '../service/cpr-service.js'
 
 const router: Express = express();
 
-
-
+// Returns full person(s)
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
     res.send('TODO!');
@@ -23,7 +23,7 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
 });
 
 router.get('/cpr', (req: Request, res: Response) => {
-    res.send('TODO!');
+    res.send( [generateCprNumberFromDobAndGender(new Date(), "female")] );
 
 });
 
