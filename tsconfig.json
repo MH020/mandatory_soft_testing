@@ -42,5 +42,6 @@
     "skipLibCheck": true,
   },
 
-  "exclude": ["dist/**"]
+  //"include": ["/data"]
+  "exclude": ["dist/**", "e2e/**", "playwright.config.ts" ]
 }

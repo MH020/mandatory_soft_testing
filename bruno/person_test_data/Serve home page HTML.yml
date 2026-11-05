@@ -1,0 +1,24 @@
+info:
+  name: Serve home page HTML
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{SERVER}}/"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("can land on home page", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
