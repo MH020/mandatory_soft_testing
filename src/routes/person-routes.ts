@@ -1,6 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
 import { get_random_person } from '../service/person-service.js';
-import readFile from '../repository/person-repository.js';
+import { readFile } from '../repository/person-repository.js';
 
 const router: Express = express();
 const peoplelist = readFile(); 

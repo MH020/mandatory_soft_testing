@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import readFile from '../src/repository/person-repository.js';
+import {readFile} from '../src/repository/person-repository.js';
 
 describe('reading file test', () => {
   test('does not throw an error', () => {
