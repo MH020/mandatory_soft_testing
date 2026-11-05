@@ -12,7 +12,9 @@
 
 # Local Setup
 ## Setup
-.env file \
+.env file with the following line \
+DATABASE_URL=postgres://postgres:secret@localhost:5432/addresses
+
 ```$ npm install``` \
 to fix mege conflicts with package you can just reinstall it: 
 ```$ npm install --package-lock-only```
