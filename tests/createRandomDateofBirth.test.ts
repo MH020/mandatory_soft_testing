@@ -1,47 +1,44 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
 import { createRandomDateOfBirth } from '../src/repository/person-repository.js';
-import { beforeEach } from 'node:test';
 
-  const now = new Date();
-  const start = Date.UTC(1868, 0, 1);
-  const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+const now = new Date();
+const start = Date.UTC(1868, 0, 1);
+const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+describe('random date of birth tests', () => {
 
-beforeEach(() => {
-  jest.useFakeTimers();
-  jest.setSystemTime(new Date('2026-01-01T00:00:00Z'));
-});
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-afterEach(() => {
-  jest.restoreAllMocks();
-  jest.useRealTimers();
-});
+  
+  it("returns the start date when math random is 0", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0);
 
-test("returns the start date when math random is 0", () => {
-  jest.spyOn(Math, "random").mockReturnValue(0);
-
-  expect(createRandomDateOfBirth().getTime()).toBe(start);
-});
+    expect(createRandomDateOfBirth().getTime()).toBe(start);
+  });
 
 
-test("returns the midpoint when math andom is 0.5", () => {
-  jest.spyOn(Math, "random").mockReturnValue(0.5);
+  it("returns the midpoint when math andom is 0.5", () => {
+    jest.spyOn(Date, 'now').mockReturnValue(new Date(Date.UTC(2026, 11, 5)).getTime());
+    jest.spyOn(Math, "random").mockReturnValue(0.5);
 
-  const expected = new Date(Date.UTC(1947, 5, 4));
-  expect(createRandomDateOfBirth().getTime()).toBe(expected.getTime());
-});
+    const expected = new Date(Date.UTC(1947, 5, 19));
+    expect(createRandomDateOfBirth().getTime()).toBe(expected.getTime());
+  });
 
-test("returns a date near the upper limit", () => {
-  jest.spyOn(Math, "random").mockReturnValue(0.999999);
+  it("returns a date near the upper limit", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.999999);
 
-  const result = createRandomDateOfBirth();
+    const result = createRandomDateOfBirth();
 
-  expect(result.getTime()).toBeGreaterThan(start);
-});
+    expect(result.getTime()).toBeGreaterThan(start);
+  });
 
-test("returns a date near the upper limit", () => {
-  jest.spyOn(Math, "random").mockReturnValue(0.999999);
+  it("returns a date near the upper limit", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.999999);
 
-  const result = createRandomDateOfBirth();
+    const result = createRandomDateOfBirth();
 
-  expect(result.getTime()).toBeLessThan(today);
+    expect(result.getTime()).toBeLessThan(today);
+  });
 });

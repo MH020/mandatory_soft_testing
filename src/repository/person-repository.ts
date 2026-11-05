@@ -16,7 +16,7 @@ export function readFile() {
 const start = Date.UTC(1868, 0, 1);
 
 export function createRandomDateOfBirth() {
-    const now = new Date(); 
+    const now = new Date(Date.now());
 
     const today = Date.UTC(
         now.getFullYear(),
