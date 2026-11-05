@@ -8,7 +8,7 @@ describe("makeIntoIsodate", () => {
     expect(makeIntoIsodate(date)).toBe('{"birthdate":"2000-01-02"}');
   });
 
-  test("omits the time from the output", () => {
+  test("remove time from from the output", () => {
     const date = new Date(Date.UTC(2000, 0, 2, 15, 30));
 
     const result = JSON.parse(makeIntoIsodate(date));
@@ -16,8 +16,8 @@ describe("makeIntoIsodate", () => {
     expect(result).toEqual({ birthdate: "2000-01-02" });
   });
 
-  test("throws for an invalid date", () => {
-    const invalidDate = new Date("not a date");
+  test("panic for invalid date", () => {
+    const invalidDate = new Date("fishstick");
 
     expect(() => makeIntoIsodate(invalidDate)).toThrow(RangeError);
   });
