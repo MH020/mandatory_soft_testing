@@ -9,8 +9,7 @@ const postalCodes = await db
 
 
 
-export function randomStreet() { 
-    const length = Math.floor(Math.random() * 10) + 5;
+export function randomLetters(length: number) { 
     const letters = "qwertyuiopåøælkjhgfdsazxcvbnm";
     let result = "";
 
@@ -23,4 +22,24 @@ export function randomStreet() {
 
 export function randomNumberWithUppercaseLetter() {
     const randomNumber = Math.floor(Math.random() * 999) + 1;
+
+    if (Math.random() < 0.5) {
+        let letter = randomLetters(1).toUpperCase()
+        return `${randomNumber}${letter}`
+    }
+    return `${randomNumber}`;
+}
+
+export function floor() {
+    const randomNumber = Math.floor(Math.random() * 99) + 1;
+
+    if (Math.random() < 0.5) {
+        return "st";
+    }
+    return `${randomNumber}`;
+
+}
+
+export function door() {
+
 }
