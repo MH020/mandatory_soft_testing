@@ -2,6 +2,8 @@ import express, { type Express, type Request, type Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 
+import personRoutes from './routes/person-routes.js'
+
 const PORT: number = 8080;
 const __dirname = path.resolve('.');
 const app: Express = express();
@@ -14,6 +16,9 @@ app.get('/', (req: Request, res: Response) => {
   const publicDir = path.join(__dirname, 'public');
   res.sendFile(path.join(publicDir, 'index.html'));
 });
+
+// add routes for test data generation
+app.use('/api', personRoutes);
 
 //404 splat message
 app.all('/{*splat}', (req: Request, res: Response) => {
