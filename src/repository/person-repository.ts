@@ -26,8 +26,8 @@ export function createRandomDateOfBirth() {
 
     let daysDiferance = (today - start) * Math.random() + start; 
 
-
-    return new Date(daysDiferance);
+    const randomDay = new Date(daysDiferance);
+    return new Date(Date.UTC(randomDay.getFullYear(), randomDay.getMonth(), randomDay.getDate()));
 
 }
 
