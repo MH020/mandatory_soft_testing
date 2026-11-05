@@ -1,76 +1,43 @@
--- phpMyAdmin SQL Dump
--- version 5.0.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Mar 10, 2022 at 11:06 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+BEGIN;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+DROP TABLE IF EXISTS postal_code;
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `addresses`
---
-CREATE DATABASE IF NOT EXISTS `addresses` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `addresses`;
-
-DELIMITER $$
---
--- Procedures
---
-DROP PROCEDURE IF EXISTS `RemoveDuplicates`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RemoveDuplicates` ()  BEGIN
-	DECLARE vcPostalCode CHAR(4);
-	DECLARE vbFinished INTEGER DEFAULT 0;
-    DECLARE curPostalCodes CURSOR FOR 
-    	SELECT cPostalCode 
+CREATE TABLE postal_code (
+    "cPostalCode" CHAR(4) PRIMARY KEY,
+    "cTownName" VARCHAR(20) DEFAULT NULL
+);
+CREATE OR REPLACE PROCEDURE "RemoveDuplicates"()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    vcPostalCode CHAR(4);
+    curPostalCodes CURSOR FOR
+        SELECT "cPostalCode"
         FROM postal_code
-        GROUP BY cPostalCode 
-        	HAVING COUNT(*) > 1;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET vbFinished = TRUE;
+        GROUP BY "cPostalCode"
+        HAVING COUNT(*) > 1;
+BEGIN
+    OPEN curPostalCodes;
 
-	OPEN curPostalCodes;
-    
-    loop_pc: LOOP
-    	FETCH curPostalCodes INTO vcPostalCode;
-        IF vbFinished THEN
-        	LEAVE loop_pc;
-        END IF;
-        DELETE FROM postal_code WHERE cPostalCode = vcPostalCode LIMIT 1;
-    END LOOP loop_pc;
-    
+    LOOP
+        FETCH curPostalCodes INTO vcPostalCode;
+
+        EXIT WHEN NOT FOUND;
+
+        DELETE FROM postal_code
+        WHERE ctid = (
+            SELECT ctid
+            FROM postal_code
+            WHERE "cPostalCode" = vcPostalCode
+            LIMIT 1
+        );
+    END LOOP;
+
     CLOSE curPostalCodes;
-END$$
+END;
+$$;
 
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `postal_code`
---
-
-DROP TABLE IF EXISTS `postal_code`;
-CREATE TABLE IF NOT EXISTS `postal_code` (
-  `cPostalCode` char(4) NOT NULL,
-  `cTownName` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`cPostalCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `postal_code`
---
-
-INSERT INTO `postal_code` (`cPostalCode`, `cTownName`) VALUES
+INSERT INTO postal_code ("cPostalCode", "cTownName") VALUES
 ('1301', 'København K'),
 ('2000', 'Frederiksberg'),
 ('2100', 'København Ø'),
@@ -660,8 +627,8 @@ INSERT INTO `postal_code` (`cPostalCode`, `cTownName`) VALUES
 ('9981', 'Jerup'),
 ('9982', 'Aalbæk'),
 ('9990', 'Skagen');
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Execute the stored procedure
+CALL "RemoveDuplicates"();
+
+COMMIT;
