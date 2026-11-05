@@ -1,16 +1,13 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { get_random_person } from '../service/person-service.js';
-import { readFile } from '../repository/person-repository.js';
 
 const router: Express = express();
-const peoplelist = readFile(); 
+
 
 
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
-    let persons = peoplelist.persons
-    let person = get_random_person(persons)
-    res.send(person);
+    res.send('TODO!');
+
 });
 
 
