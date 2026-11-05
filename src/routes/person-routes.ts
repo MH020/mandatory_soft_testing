@@ -8,15 +8,14 @@ const peoplelist = readFile();
 
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
-    let persons = peoplelist.persons
-    let person = get_random_person(persons)
-    res.send(person);
+    res.send("TODO!");
 });
 
 
 router.get('/name-gender', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    let persons = peoplelist.persons
+    let person = get_random_person(persons)
+    res.send(person);
 });
 
 
