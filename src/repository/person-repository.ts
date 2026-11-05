@@ -33,5 +33,3 @@ export function createRandomDateOfBirth() {
 export function makeIntoIsodate(date: Date) {
     return JSON.stringify({ birthdate: date.toISOString().slice(0, 10) });
 }
-
-console.log(makeIntoIsodate(createRandomDateOfBirth()))
