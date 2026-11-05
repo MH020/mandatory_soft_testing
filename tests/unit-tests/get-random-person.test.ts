@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import type { person } from '../src/dtos/person-dto.js';
-import { get_random_person } from '../src/service/person-service.js';
+import type { person } from '../../src/dtos/person-dto.js';
+import { get_random_person } from '../../src/service/person-service.js';
 
 
 const people = [
