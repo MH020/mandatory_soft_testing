@@ -41,5 +41,13 @@ export function floor() {
 }
 
 export function door() {
+    const choice = Math.floor(Math.random() * 5);
+    if (choice === 0) return "th"
+    if (choice === 1) return "mf"
+    if (choice === 2) return "tv"
+    if (choice === 3) return Math.floor(Math.random() * 50) + 1;
+    if (choice === 4) {
+        
+    }
 
 }
