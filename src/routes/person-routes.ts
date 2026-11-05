@@ -1,5 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
-import generateCprNumberFromDobAndGender from '../service/cpr-service.js'
+import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
 
 const router: Express = express();
 

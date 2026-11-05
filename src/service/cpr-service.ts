@@ -1,5 +1,5 @@
 
-export default function generateCprNumberFromDobAndGender(dob: Date, gender: string) {
+export function generateCprNumberFromDobAndGender(dob: Date, gender: string) {
     const dateString = formatDateAsDDMMYY(dob);
     const numberString = generateCprSecretDigits(gender);
     
@@ -7,25 +7,29 @@ export default function generateCprNumberFromDobAndGender(dob: Date, gender: str
 }
 
 // format date as ddmmyy (for cpr)
-function formatDateAsDDMMYY(dob: Date) {
+export function formatDateAsDDMMYY(dob: Date) {
     let result = '';
 
     // format date
     if (dob.getDate() < 10) {
-        result += ' ';
+        result += '0';
     }
     result += dob.getDate().toString();
 
     // format month
-    if(dob.getMonth() < 10) {
-        result += ' ';
+    const month = dob.getMonth() + 1;
+    if(month < 10) {
+        result += '0';
     }
-    result += dob.getMonth().toString();
+    result += month.toString();
 
-    dob.getFullYear().toString().slice(2);
+    //format year
+    result += dob.getFullYear().toString().slice(2);
+    
+    return result;
 }
 
-function generateCprSecretDigits(gender: string) {
+export function generateCprSecretDigits(gender: string) {
     let secretDigits: string = '';
 
     for (let i = 0; i < 2; i++) {
