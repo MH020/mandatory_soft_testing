@@ -8,6 +8,10 @@ export function generateCprNumberFromDobAndGender(dob: Date, gender: string) {
 
 // format date as ddmmyy (for cpr)
 export function formatDateAsDDMMYY(dob: Date) {
+    if (dob.getFullYear() < 1000 || dob.getFullYear() >= 10000 ) {
+        throw new Error('Invalid birth year: ' + dob.getFullYear() );
+    }
+
     let result = '';
 
     // format date
@@ -24,6 +28,7 @@ export function formatDateAsDDMMYY(dob: Date) {
     result += month.toString();
 
     //format year
+
     result += dob.getFullYear().toString().slice(2);
     
     return result;

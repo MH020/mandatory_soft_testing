@@ -62,19 +62,27 @@ describe('Convert DOB to DDMMYY format', () => {
         [new Date( Date.parse("28. feb") ), "280201"], 
 
 
-    ])( 'When DOB is %o, date format is %s', (dob: Date, expectedFormat: string) => {
+    ])( 'When DOB is %o, date format is %s', (dob: Date, expectedFormat: string) => {        
         const actualFormat = formatDateAsDDMMYY(dob);
         expect(actualFormat).toBe(expectedFormat);
     });
 
-    /* TODO:
+    // --- SAD PATH :(( ---
     test.each([
-        [new Date( Date.parse("1. jan, 100") )],
+        [new Date( Date.parse("1. jan, 100") )]
+    ]) ( "throws error when DOB is: %o", (dob: Date) => {
+        expect( () => { formatDateAsDDMMYY(dob); } ).toThrow();
+    });
+
+/*  // TODO:
+    test.each([
             [new Date( Date.parse("28") )], 
      ]) ( "It doesn't work when DOB is: %o", (dob: Date) => {
         const actualFormat = formatDateAsDDMMYY(dob);
-        expect(actualFormat).toBeNaN();
-    }); */
+        expect(actualFormat).toThrow(Error);//toBeNaN();
+    }); 
+*/
+
 });
 
 
