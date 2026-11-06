@@ -22,4 +22,10 @@ describe("randomLetters", () => {
         expect(randomLetters(0)).toBe("");
     });
 
+    it("uses Math random to choose letters", () => {
+        jest.spyOn(Math, "random").mockReturnValue(0);
+
+        expect(randomLetters(3)).toBe("qqq");
+    });
+
 });
