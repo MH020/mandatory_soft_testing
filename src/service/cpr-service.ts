@@ -40,10 +40,10 @@ export function formatDateAsDDMMYY(dob: Date) {
     return result;
 }
 
-export function generateCprSecretDigits(gender: string) {
+export function generateCprSecretDigits(gender: string) :string{
     let secretDigits: string = '';
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         secretDigits += (Math.random() * 10).toFixed(0).toString();
     }
 

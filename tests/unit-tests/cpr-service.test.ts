@@ -1,35 +1,11 @@
-import { describe, expect, test } from "@jest/globals";
-
-import { generateCprNumberFromDobAndGender, formatDateAsDDMMYY, generateCprSecretDigits} from "../../src/service/cpr-service.js"
+import { describe, expect, test, jest, xtest } from "@jest/globals";
 import { dateFromMilliseconds } from "drizzle-orm/sqlite-core";
 
+import { generateCprNumberFromDobAndGender, formatDateAsDDMMYY, generateCprSecretDigits} from "../../src/service/cpr-service.js"
+// import * as cprService from "../../src/service/cpr-service.js"
 
 
-/* Valid partitions: 
-Years:
-1868 - 1970 - 2026
-Months:
-Jan - Dec
-Days:
-1 - 28, 29, 30, 31
-*/
 
-/* 
-Invalid partions:
-Years: 
-1 - 999
-0
--1 - -[infinite]
-2027 - [infinite]
-
-Months:
-
-Days:
--1 - -[infinite]
-0
-32
-(in some months: 29, 30, 31)
-*/
 describe('Convert DOB to DDMMYY format', () => {
 
     test.each([
@@ -70,7 +46,7 @@ describe('Convert DOB to DDMMYY format', () => {
         expect(actualFormat).toBe(expectedFormat);
     });
 
-    // --- SAD PATH :(( ---
+    // --- SAD PATH :( ---
     test.each([
         // year should be 1000 - 9999 (4 digits)
         [new Date( Date.parse("1. jan, 999") )], 
@@ -85,12 +61,79 @@ describe('Convert DOB to DDMMYY format', () => {
         [new Date( Date.parse("1. jan, jfksdfj") )],
         [new Date( Date.parse("28") )]
     ]) ( "throws error when DOB is: %o", (dob: Date) => {
-        expect( () => { const result = formatDateAsDDMMYY(dob);
-            console.log("dob: " + dob + ", result: " + result);
+        expect( () => { formatDateAsDDMMYY(dob);
          } ).toThrow();
     });
 });
 
 
-// Intervals: 
+// TODO. Issues with mocking utility functions. 
+// generateCprSecretDigits especially needs to be mocked, because its output cannot be predicted, but affects the return value of generateCprNumberFromDobAndGender.
+describe('generateCprNumberFromDobAndGender()', () => {
+    xtest.each([
+        [new Date( Date.parse("1. jan, 1967") ), "female", "010167", "1234", "010167-1234"],
+
+    ]) ( "succedes with DOB: %o and gender: %s", (dob: Date, gender: string, dobFormatted: string, secretDigits: string, expected: string) => {
+        
+        const mockDobFormatted = jest.fn<typeof formatDateAsDDMMYY>();
+        mockDobFormatted.mockImplementation((dob) => dobFormatted);
+       
+        // This would be nice, if it was called by generateCprNumberFromDobAndGender.
+        const mockSecretDigits = jest.fn<typeof generateCprSecretDigits>(); //(gender: string) => secretDigits) ;
+        mockSecretDigits.mockReturnValue(secretDigits);
+
+
+
+
+
+        // Tried to import everything as cprService, so we could use spyOn like we do with Math.random, but it doesn't work. 
+        // "   ( TypeError: Cannot assign to property 'generateCprSecretDigits' of [object Module])    "
+        jest.spyOn(cprService, 'generateCprSecretDigits').mockReturnValue(secretDigits);
+
+              // jest.mock(generateCprSecretDigits); 
+        /*
+        mockSecretDigits.mockImplementation((gender) => secretDigits);
+
+        // jest.spyOn(Math, "random").mockReturnValue(i);
+        */
+        
+
+
+
+
+
+        // This could also work, but doesn't.
+        (generateCprSecretDigits as jest.Mock).mockReturnValue(secretDigits);
+
+        // (generateCprSecretDigits as jest.Mock).mockImplementation((gender) => secretDigits); // mockReturnValue(secretDigits); //.mockReturnValue(secretDigits);
+        // cprService.generateCprNumberFromDobAndGender(dob, gender);
+
+        
+        const actual = generateCprNumberFromDobAndGender(dob, gender);
+        expect(actual).toBe(expected);
+    });
+});
+
+describe('generateCprSecretDigits()', () => {
+
+  test.each([
+        ["female", 0.0, "0000"],
+        ["female", 0.1, "1110"], // -1 (must be even)
+        ["female", 0.9, "9998"],
+
+        ["male", 0.0, "0001"], // +1 (must be uneven)
+        ["male", 0.1, "1111"],
+        ["male", 0.9, "9999"],
+
+    ]) ( "succes with DOB: %o and gender: %s", (gender: string, i: number, expected: string) => {
+        jest.spyOn(Math, "random").mockReturnValue(i);
+        
+        const actual = generateCprSecretDigits(gender);
+
+        expect(actual).toBe(expected);
+    });
+
+
+
+});
 
