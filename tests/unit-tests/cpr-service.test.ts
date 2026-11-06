@@ -5,15 +5,17 @@ import { dateFromMilliseconds } from "drizzle-orm/sqlite-core";
 
 
 
-// Valid partitions: 
-// Years:
-// 1868 - 1970 - 2026
-// Months:
-// Jan - Dec
-// Days:
-// 1 - 28, 29, 30, 31
+/* Valid partitions: 
+Years:
+1868 - 1970 - 2026
+Months:
+Jan - Dec
+Days:
+1 - 28, 29, 30, 31
+*/
 
-/* Invalid partions:
+/* 
+Invalid partions:
 Years: 
 1 - 999
 0
@@ -27,8 +29,6 @@ Days:
 0
 32
 (in some months: 29, 30, 31)
-
-
 */
 describe('Convert DOB to DDMMYY format', () => {
 
@@ -58,9 +58,12 @@ describe('Convert DOB to DDMMYY format', () => {
         // --- MISC: ---
         [new Date( Date.parse("28. feb, 1999") ), "280299"], 
         [new Date( Date.parse("29. feb, 2000") ), "290200"], // Leap year
-        
-        [new Date( Date.parse("28. feb") ), "280201"], 
+        [new Date( Date.parse("29. feb, 2001") ), "010301"], 
 
+        [new Date( Date.parse("-1. jan, 2000") ), "010100"], // ????
+        [new Date( Date.parse("1. jan, 1") ), "010101"],
+        [new Date( Date.parse("1. jan, 0") ), "010100"],     
+        [new Date( Date.parse("28. feb") ), "280201"],
 
     ])( 'When DOB is %o, date format is %s', (dob: Date, expectedFormat: string) => {        
         const actualFormat = formatDateAsDDMMYY(dob);
@@ -69,10 +72,22 @@ describe('Convert DOB to DDMMYY format', () => {
 
     // --- SAD PATH :(( ---
     test.each([
-        [new Date( Date.parse("1. jan, 100") )],
+        // year should be 1000 - 9999 (4 digits)
+        [new Date( Date.parse("1. jan, 999") )], 
+        [new Date( Date.parse("1. jan, 10000") )],
+
+        // Invalid dates:
+        [new Date( Date.parse("1. jan, -1") )],
+        [new Date( Date.parse("32. jan, 2000") )],
+
+        // Invalid date formats:
+        [new Date( Date.parse("1. djfskf, 2000") )],
+        [new Date( Date.parse("1. jan, jfksdfj") )],
         [new Date( Date.parse("28") )]
     ]) ( "throws error when DOB is: %o", (dob: Date) => {
-        expect( () => { formatDateAsDDMMYY(dob); } ).toThrow();
+        expect( () => { const result = formatDateAsDDMMYY(dob);
+            console.log("dob: " + dob + ", result: " + result);
+         } ).toThrow();
     });
 });
 

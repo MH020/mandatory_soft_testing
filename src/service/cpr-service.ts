@@ -12,7 +12,7 @@ export function formatDateAsDDMMYY(dob: Date) {
         || Number.isNaN(dob.getMonth()) 
         || Number.isNaN(dob.getFullYear()) 
     ) {
-        throw new Error ('Invalid date format:' + dob);
+        throw new Error ('Invalid date format: ' + dob);
     }
 
     if (dob.getFullYear() < 1000 || dob.getFullYear() >= 10000 ) {
@@ -35,7 +35,6 @@ export function formatDateAsDDMMYY(dob: Date) {
     result += month.toString();
 
     //format year
-
     result += dob.getFullYear().toString().slice(2);
     
     return result;
