@@ -7,15 +7,19 @@ describe("randomLetters", () => {
     jest.restoreAllMocks();
   });
 
-  it("returns the requested number of letters", () => {
-    expect(randomLetters(5)).toHaveLength(5);
-  });
+    it("returns the requested number of letters", () => {
+        expect(randomLetters(5)).toHaveLength(5);
+    });
 
-  it("only return letters from my keyboard", () => {
-    const letters = "qwertyuiopåøælkjhgfdsazxcvbnm";
+    it("only return letters from my keyboard", () => {
+        const letters = "qwertyuiopåøælkjhgfdsazxcvbnm";
 
-    expect([...randomLetters(20)].every(letter => letters.includes(letter)))
-      .toBe(true);
-  });
+        expect([...randomLetters(20)].every(letter => letters.includes(letter)))
+        .toBe(true);
+    });
+
+    it("returns an empty string when length is 0", () => {
+        expect(randomLetters(0)).toBe("");
+    });
 
 });
