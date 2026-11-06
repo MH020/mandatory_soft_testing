@@ -1,5 +1,6 @@
 import { postalCode } from "../../drizzle/schema.js";
 import db from "../db/connection.js";
+import { address } from "../dtos/adresse-dto.js";
 
 const postalCodes = await db
   .select({
@@ -45,7 +46,7 @@ export function door() {
   if (choice === 0) return "th"
   if (choice === 1) return "mf"
   if (choice === 2) return "tv"
-  if (choice === 3) return Math.floor(Math.random() * 50) + 1;
+  if (choice === 3) return (Math.floor(Math.random() * 50) + 1).toString();
 
   let letter = randomLetters(1); 
   let randomNumber = Math.floor(Math.random() * 1000);
@@ -53,4 +54,17 @@ export function door() {
 
   return `${letter}${dash}${randomNumber}`;
 
+}
+
+export function adress(): address {
+  const randomNumber = Math.floor(Math.random() * 15) + 1;
+  const randomPostalCode = postalCodes[Math.floor(Math.random() * postalCodes.length)];
+  
+  return {
+    street: randomLetters(randomNumber),
+    number: randomNumberWithUppercaseLetter(),
+    floor: floor(),
+    door: door(),
+    postal_code_and_town: randomPostalCode,
+  };
 }

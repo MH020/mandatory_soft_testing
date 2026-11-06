@@ -5,7 +5,7 @@ export interface postalCode {
 
 export interface address {
     street: String, 
-    number: Number, 
+    number: String, 
     floor: String, 
     door: String, 
     postal_code_and_town: postalCode
