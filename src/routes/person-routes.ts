@@ -23,7 +23,11 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
 });
 
 router.get('/cpr', (req: Request, res: Response) => {
-    res.send( [generateCprNumberFromDobAndGender(new Date(), "female")] );
+    const dob: Date = generateDob();
+    const gender: string = getNameGender().gender;
+
+    const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
+    res.send( [cpr] );
 
 });
 
