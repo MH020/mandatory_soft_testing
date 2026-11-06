@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { randomLetters } from '../../src/repository/addresse-repository.js';
+import { randomLetters } from '../../src/service/adresses-servoce.js';
+
 
 
 describe("randomLetters", () => {

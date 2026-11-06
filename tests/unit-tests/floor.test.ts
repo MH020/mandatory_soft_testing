@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { floor } from '../../src/repository/addresse-repository.js';
+import { floor } from '../../src/service/adresses-servoce.js';
 
 
 

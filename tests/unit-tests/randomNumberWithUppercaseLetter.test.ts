@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { randomNumberWithUppercaseLetter } from '../../src/repository/addresse-repository.js';
+import { randomNumberWithUppercaseLetter } from '../../src/service/adresses-servoce.js';
 
 
 
