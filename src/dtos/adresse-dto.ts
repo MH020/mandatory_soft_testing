@@ -1,6 +1,6 @@
 export interface postalCode {
     post_code: String, 
-    city_name: String 
+    city_name: string | null; 
 }
 
 export interface address {
