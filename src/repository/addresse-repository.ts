@@ -59,7 +59,11 @@ export function door() {
 export function adress(): address {
   const randomNumber = Math.floor(Math.random() * 15) + 1;
   const randomPostalCode = postalCodes[Math.floor(Math.random() * postalCodes.length)];
-  
+
+  if (!randomPostalCode) {
+    throw new Error("No postal codes available");
+  }
+
   return {
     street: randomLetters(randomNumber),
     number: randomNumberWithUppercaseLetter(),
