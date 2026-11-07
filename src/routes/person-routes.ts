@@ -2,6 +2,7 @@ import express, { type Express, type Request, type Response } from 'express';
 import { adress } from '../service/addresses-service.js';
 import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
 import { getRandomPerson } from '../service/person-service.js';
+import { getRandomPhoneNumber } from '../service/person-service.js';
 
 const router: Express = express();
 const peoplelist = readFile(); 
@@ -51,8 +52,8 @@ router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
 
 
 router.get('/phone', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    const phoneNumber = getRandomPhoneNumber();
+    res.send(phoneNumber);
 });
 
 
