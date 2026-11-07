@@ -8,9 +8,47 @@ http:
   url: "{{SERVER}}/api/name-gender-dob"
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status 200", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Contains name", function () {
+          const body = res.getBody()
+          expect(body.name).to.be.a('string');
+        });
+
+        test("Contains surname", function () {
+          const body = res.getBody()
+          expect(body.surname).to.be.a('string');
+        });
+
+        test("Contains gender", function () {
+          const body = res.getBody()
+          expect(body.gender).to.be.a('string');
+        });
+
+        test("Contains date of birth", function () {
+          const body = res.getBody()
+          expect(body.dateOfBirth).to.be.a('string');
+        });
+
+        test("Date of birth has the following signature: yyyy-mm-dd", function () {
+          const body = res.getBody()
+          
+          expect(body.dateOfBirth.length).to.equal(10);
+          expect(body.dateOfBirth.substring(0, 4)).to.match(/^\d+$/);
+          expect(body.dateOfBirth[4]).to.equal("-")
+          expect(body.dateOfBirth.substring(5, 7)).to.match(/^\d+$/);
+          expect(body.dateOfBirth[7]).to.equal("-")
+          expect(body.dateOfBirth.substring(8)).to.match(/^\d+$/);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
-  forwardAuthorizationHeader: false

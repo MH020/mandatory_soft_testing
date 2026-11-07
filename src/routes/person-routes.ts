@@ -1,8 +1,8 @@
 import express, { type Express, type Request, type Response } from 'express';
 import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
 import { adress } from '../service/address-service.js';
-import { getRandomNameGender } from '../service/person-service.js';
-import readFile from '../repository/person-repository.js';
+import { getRandomNameGender, getRandomPhoneNumber} from '../service/person-service.js';
+import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
 
 const router: Express = express();
 const peoplelist = readFile();
@@ -10,7 +10,7 @@ const peoplelist = readFile();
 // Returns full person(s)
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
-    res.send("TODO!");
+    res.send('TODO!');
 });
 
 
@@ -22,13 +22,22 @@ router.get('/name-gender', (req: Request, res: Response) => {
 
 
 router.get('/name-gender-dob', (req: Request, res: Response) => {
-    res.send('TODO!');
+    let persons = peoplelist.persons;
+    let person = getRandomNameGender(persons);
+    let dob = createRandomDateOfBirth();
+
+    res.send({
+        name: person.name,
+        surname: person.surname,
+        gender: person.gender,
+        dateOfBirth: makeIntoIsodateString(dob)
+    });
 
 });
 
 router.get('/cpr', (req: Request, res: Response) => {
-    const dob: Date = new Date(Date.now()); // generateDob(); /// !TODO!
-    const gender: string = getRandomNameGender(peoplelist.persons)?.gender ?? "undefined";
+    const dob: Date = createRandomDateOfBirth();
+    const gender: string = getRandomNameGender(peoplelist.persons).gender;
 
     const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
     res.send( [cpr] );
@@ -47,8 +56,8 @@ router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
 
 
 router.get('/phone', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    const phoneNumber = getRandomPhoneNumber();
+    res.send(phoneNumber);
 });
 
 
