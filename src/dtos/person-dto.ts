@@ -18,11 +18,11 @@ export interface PersonDTO {
     phoneNumber?: string,
 }
 
-/*
-function renameFieldMapper(input: NameGender | people): PersonDTO {
-  return {
-    id: input.userId
-  };
-}
 
-*/
+export function NameGenderToPersonDTO(person:NameGender) {
+       return {
+        firstName: person.name,
+        lastNameValue: person.surname,
+        gender: person.gender,
+    };
+}
