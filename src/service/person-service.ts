@@ -1,14 +1,12 @@
 import type { NameGender } from "../dtos/person-dto.js";
+import { readFile } from "../repository/person-repository.js";
 
-export function getRandomPerson(peoplelist: Array<NameGender>) {
-    return peoplelist[Math.floor(Math.random() * peoplelist.length)];
-}
+const nameGenderList = readFile();
 
 // return random name and gender
-export function getRandomNameGender(peoplelist: Array<NameGender>) {
-    return peoplelist[Math.floor(Math.random() * peoplelist.length)]!;
+export function getRandomNameGender() : NameGender{
+    return nameGenderList[Math.floor(Math.random() * nameGenderList.length)]!;
 }
-
 
 export function getRandomPhoneNumber() : number {
     const startingNumbers : number[] = [2, 30, 31, 40, 41, 42, 50, 51, 52, 53, 60, 61, 71, 81, 91, 92, 93, 

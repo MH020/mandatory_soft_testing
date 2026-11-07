@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path'
-import { People } from '../dtos/person-dto.js';
+import { NameGender } from '../dtos/person-dto.js';
 
 
 
@@ -8,9 +8,11 @@ const filePath = path.resolve(process.cwd(), 'data/person.json');
 
 export function readFile() {
     const data = fs.readFileSync(filePath, "utf8")
-    const people = JSON.parse(data) as People
+    const people = JSON.parse(data) as Array<NameGender>
     return people
 }
+
+
 
 const start = Date.UTC(1868, 0, 1);
 
