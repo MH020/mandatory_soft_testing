@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import process from 'process';
 
 /**
  * Read environment variables from file.
@@ -49,7 +50,7 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 
-    /* Test against mobile viewports. */
+    // Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
@@ -71,11 +72,11 @@ export default defineConfig({
   ]
 
   /* Run your local dev server before starting the tests */
-  /*
+
   ,
   webServer: {
     command: 'npm start',
     url: 'http://localhost:8080',
     reuseExistingServer: !process.env.CI,
-  },*/
+  },
 });

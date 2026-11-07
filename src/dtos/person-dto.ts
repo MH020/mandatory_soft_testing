@@ -1,4 +1,4 @@
-export interface people {
+export interface People {
     persons: Array<NameGender>
 }
 

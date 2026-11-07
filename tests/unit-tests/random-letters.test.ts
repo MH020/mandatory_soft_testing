@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { randomLetters } from '../../src/service/addresses-service.js';
+import { randomLetters } from '../../src/service/address-service.js';
 
 
 
