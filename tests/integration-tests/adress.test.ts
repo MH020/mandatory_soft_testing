@@ -1,7 +1,6 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
-import { adress } from '../../src/service/addresses-service.js';
+import { adress } from '../../src/service/address-service.js';
 import { getPostalCodes } from '../../src/repository/addresse-repository.js';
-
 
 
 describe ('adresses tests', () => {

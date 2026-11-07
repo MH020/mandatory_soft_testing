@@ -1,4 +1,4 @@
-import { address } from "../dtos/adresse-dto.js";
+import { address } from "../dtos/address-dto.js";
 import { getPostalCodes } from "../repository/addresse-repository.js";
 
 export function randomLetters(length: number) { 
