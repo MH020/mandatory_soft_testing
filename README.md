@@ -28,6 +28,11 @@ to fix mege conflicts with package you can just reinstall it:
 **Backend API:** http://localhost:8080/api/**
 
 # Testing:
+
+## normal testing
+unit tests: ```$ npm run test``` \
+intergration tests: ```$ npm run intergration-test``` 
+
 ## End to end
 We use Playwright for end to end tests. Specs are found in /e2e
 
