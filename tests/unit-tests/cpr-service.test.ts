@@ -117,16 +117,23 @@ describe('generateCprNumberFromDobAndGender()', () => {
 describe('generateCprSecretDigits()', () => {
 
   test.each([
-        ["female", 0.0, "0000"],
-        ["female", 0.1, "1110"], // -1 (must be even)
-        ["female", 0.9, "9998"],
+        ["female", [0.0, 0.0, 0.0, 0.0], "0000"], // Lower boundary
+        ["female", [0.0, 0.0, 0.0, 0.1], "0000"], // -1 (must be even)
+        ["female", [0.1, 0.2, 0.3, 0.4], "1234"],  
+        ["female", [0.9, 0.9, 0.9, 0.8], "9998"], 
+        ["female", [0.9, 0.9, 0.9, 0.9], "9998"], // -1. Upper boundary 
 
-        ["male", 0.0, "0001"], // +1 (must be uneven)
-        ["male", 0.1, "1111"],
-        ["male", 0.9, "9999"],
-
-    ]) ( "succes with DOB: %o and gender: %s", (gender: string, i: number, expected: string) => {
-        jest.spyOn(Math, "random").mockReturnValue(i);
+        ["male", [0.0, 0.0, 0.0, 0.0], "0001"], // +1 (must be uneven). Lower boundary
+        ["male", [0.0, 0.0, 0.0, 0.1], "0001"], 
+        ["male", [0.1, 0.2, 0.3, 0.4], "1235"],  
+        ["male", [0.9, 0.9, 0.9, 0.8], "9999"], // +1 
+        ["male", [0.9, 0.9, 0.9, 0.9], "9999"], // Upper boundary
+    ]) ( "succes with DOB: %o and gender: %s", (gender: string, i: number[] , expected: string) => {
+        jest.spyOn(Math, "random")
+            .mockReturnValueOnce(i[0]!)
+            .mockReturnValueOnce(i[1]!)
+            .mockReturnValueOnce(i[2]!)
+            .mockReturnValueOnce(i[3]!);
         
         const actual = generateCprSecretDigits(gender);
 
