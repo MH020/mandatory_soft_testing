@@ -25,7 +25,7 @@ describe ('adresses tests', () => {
     });
 
 
-    test("floor is a string", () => {
+    test("door is a string", () => {
         const result = adress();
 
         expect(typeof result.door).toBe("string");
