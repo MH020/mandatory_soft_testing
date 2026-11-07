@@ -8,9 +8,41 @@ http:
   url: "{{SERVER}}/api/cpr-name-gender-dob"
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status 200", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Contains name", function () {
+          const body = res.getBody()
+          expect(body.firstName).to.be.a('string');
+        });
+
+        test("Contains surname", function () {
+          const body = res.getBody()
+          expect(body.lastName).to.be.a('string');
+        });
+
+        test("Contains gender", function () {
+          const body = res.getBody()
+          expect(body.gender).to.be.a('string');
+        });
+
+        test("Contains date of birth", function () {
+          const body = res.getBody()
+          expect(body.birthDate).to.be.a('string');
+        });
+
+        test("Contains CPR", function () {
+          const body = res.getBody()
+          expect(body.CPR).to.be.a('string');
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
-  forwardAuthorizationHeader: false

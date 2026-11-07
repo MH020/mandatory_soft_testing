@@ -1,6 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
 import { getRandomNameGender, getRandomPerson, getRandomPhoneNumber } from '../service/person-service.js';
-import { NameGenderToPersonDTO } from '../dtos/person-dto.js';
+import { NameGenderToPersonDTO, PersonDTO } from '../dtos/person-dto.js';
 import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
 import { generateCprNumberFromDobAndGender } from '../service/cpr-service.js';
 import { adress } from '../service/address-service.js';
@@ -52,8 +52,18 @@ router.get('/cpr-name-gender', (req: Request, res: Response) => {
 
 
 router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
-    res.send('TODO!');
+    const personDTO : PersonDTO = {} as PersonDTO;
 
+    const person = getRandomNameGender(peoplelist.persons);
+    personDTO.firstName = person.name;
+    personDTO.lastName = person.surname;
+    personDTO.gender = person.gender;
+
+    const dob = createRandomDateOfBirth();
+    personDTO.birthDate = makeIntoIsodateString(dob);
+
+    personDTO.CPR = generateCprNumberFromDobAndGender(dob, person.gender);
+    res.send(personDTO);
 });
 
 
