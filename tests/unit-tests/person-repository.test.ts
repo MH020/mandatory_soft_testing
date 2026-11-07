@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
-import { createRandomDateOfBirth } from '../../src/repository/person-repository.js';
+import { createRandomDateOfBirth, makeIntoIsodate } from '../../src/repository/person-repository.js';
 
 const now = new Date();
 const start = Date.UTC(1868, 0, 1);
@@ -40,5 +40,27 @@ describe('random date of birth tests', () => {
     const result = createRandomDateOfBirth();
 
     expect(result.getTime()).toBeLessThan(today);
+  });
+});
+
+describe("makeIntoIsodate", () => {
+  test("returns the date as a json birthdate field", () => {
+    const date = new Date(Date.UTC(2000, 0, 2));
+
+    expect(makeIntoIsodate(date)).toBe('{"birthdate":"2000-01-02"}');
+  });
+
+  test("remove time from from the output", () => {
+    const date = new Date(Date.UTC(2000, 0, 2, 15, 30));
+
+    const result = JSON.parse(makeIntoIsodate(date));
+
+    expect(result).toEqual({ birthdate: "2000-01-02" });
+  });
+
+  test("panic for invalid date", () => {
+    const invalidDate = new Date("fishstick");
+
+    expect(() => makeIntoIsodate(invalidDate)).toThrow(RangeError);
   });
 });
