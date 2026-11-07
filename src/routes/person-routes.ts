@@ -1,6 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
 import { adress } from '../service/addresses-service.js';
-import readFile from '../repository/person-repository.js';
+import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
 import { getRandomPerson } from '../service/person-service.js';
 import { getRandomPhoneNumber } from '../service/person-service.js';
 
@@ -10,7 +10,7 @@ const peoplelist = readFile();
 
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
-    res.send("TODO!");
+    res.send('TODO!');
 });
 
 
@@ -22,7 +22,15 @@ router.get('/name-gender', (req: Request, res: Response) => {
 
 
 router.get('/name-gender-dob', (req: Request, res: Response) => {
-    res.send('TODO!');
+    let persons = peoplelist.persons;
+    let person = getRandomPerson(persons);
+    let dob = createRandomDateOfBirth();
+    res.send({
+        name: person.name,
+        surname: person.surname,
+        gender: person.gender,
+        dateOfBirth: makeIntoIsodateString(dob)
+    });
 
 });
 
