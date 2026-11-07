@@ -1,10 +1,10 @@
 import express, { type Express, type Request, type Response } from 'express';
 import { adress } from '../service/addresses-service.js';
-import readFile from '../repository/person-repository.js';
+import { readFile } from '../repository/person-repository.js';
 import { getRandomPerson } from '../service/person-service.js';
 
 const router: Express = express();
-
+const peoplelist = readFile(); 
 
 
 // Todo: add query parameter: ?n=amount
