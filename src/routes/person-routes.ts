@@ -1,5 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
 import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
+import { adress } from '../service/address-service.js';
 
 const router: Express = express();
 
@@ -50,7 +51,7 @@ router.get('/phone', (req: Request, res: Response) => {
 
 
 router.get('/address', (req: Request, res: Response) => {
-    res.send('TODO!');
+    res.send(adress());
 
 });
 
