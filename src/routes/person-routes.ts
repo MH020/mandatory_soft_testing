@@ -59,7 +59,7 @@ router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
 
 router.get('/phone', (req: Request, res: Response) => {
     const phoneNumber = getRandomPhoneNumber();
-    res.send(phoneNumber);
+    res.send({phoneNumber});
 });
 
 
