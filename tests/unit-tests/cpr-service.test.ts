@@ -88,7 +88,7 @@ describe('generateCprNumberFromDobAndGender()', () => {
 
         // Tried to import everything as cprService, so we could use spyOn like we do with Math.random, but it doesn't work. 
         // "   ( TypeError: Cannot assign to property 'generateCprSecretDigits' of [object Module])    "
-        jest.spyOn(cprService, 'generateCprSecretDigits').mockReturnValue(secretDigits);
+       // jest.spyOn(cprService, 'generateCprSecretDigits').mockReturnValue(secretDigits);
 
               // jest.mock(generateCprSecretDigits); 
         /*

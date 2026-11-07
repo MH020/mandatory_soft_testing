@@ -27,12 +27,11 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
 });
 
 router.get('/cpr', (req: Request, res: Response) => {
-    const dob: Date = generateDob();
+    const dob: Date = new Date(Date.now()); // generateDob(); /// !TODO!
     const gender: string = getRandomNameGender(peoplelist.persons)?.gender ?? "undefined";
 
     const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
     res.send( [cpr] );
-
 });
 
 router.get('/cpr-name-gender', (req: Request, res: Response) => {
