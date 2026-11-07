@@ -1,5 +1,5 @@
 import { address } from "../dtos/address-dto.js";
-import { postalCodes } from "../repository/addresse-repository.js";
+import { getPostalCodes } from "../repository/addresse-repository.js";
 
 export function randomLetters(length: number) { 
     const letters = "qwertyuiopåøælkjhgfdsazxcvbnm";
@@ -47,8 +47,9 @@ export function door() {
 
 }
 
-export function adress(): address {
+export async function adress(): Promise<address> {
   const randomNumber = Math.floor(Math.random() * 15) + 1;
+  const postalCodes = await getPostalCodes(); 
   const randomPostalCode = postalCodes[Math.floor(Math.random() * postalCodes.length)];
 
   if (!randomPostalCode) {
