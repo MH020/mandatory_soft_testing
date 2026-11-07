@@ -11,7 +11,7 @@ export function getRandomPhoneNumber() : number {
         542, 543, 545, 551, 552, 556, 571, 572, 573, 574, 577, 579, 584, 586, 587, 589, 597, 598, 
         627, 629, 641, 649, 658, 662, 663, 664, 665, 667, 692, 693, 694, 697, 
         771, 772, 782, 783, 785, 786, 788, 789, 826, 827, 829];
-    var num : string = startingNumbers[Math.floor(Math.random() * startingNumbers.length)]!.toString();
+    let num : string = startingNumbers[Math.floor(Math.random() * startingNumbers.length)]!.toString();
     while (num.length < 8)
         num = num + Math.floor(Math.random() * 10).toString();
     return  parseInt(num);
