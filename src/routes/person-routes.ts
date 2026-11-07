@@ -16,7 +16,7 @@ router.get('/person', (req: Request, res: Response) => {
 
 router.get('/name-gender', (req: Request, res: Response) => {
     let persons = peoplelist.persons
-    let person = getRandomNameGender(persons)
+    let person = getRandomNameGender(persons);
     res.send(person);
 });
 
@@ -28,7 +28,7 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
 
 router.get('/cpr', (req: Request, res: Response) => {
     const dob: Date = generateDob();
-    const gender: string = getNameGender().gender;
+    const gender: string = getRandomNameGender(peoplelist.persons)?.gender ?? "undefined";
 
     const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
     res.send( [cpr] );
