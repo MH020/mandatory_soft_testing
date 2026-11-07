@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test } from '@jest/globals';
-import { makeIntoIsodate } from '../src/repository/person-repository.js';
+import { makeIntoIsodate } from '../../src/repository/person-repository.js';
 
 describe("makeIntoIsodate", () => {
   test("returns the date as a json birthdate field", () => {

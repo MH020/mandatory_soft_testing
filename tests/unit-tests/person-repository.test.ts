@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
-import { createRandomDateOfBirth } from '../src/repository/person-repository.js';
+import { createRandomDateOfBirth } from '../../src/repository/person-repository.js';
 
 const now = new Date();
 const start = Date.UTC(1868, 0, 1);

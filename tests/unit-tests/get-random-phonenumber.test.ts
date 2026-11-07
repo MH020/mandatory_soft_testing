@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { getRandomPhoneNumber } from '../src/service/person-service.js';
+import { getRandomPhoneNumber } from '../../src/service/person-service.js';
 
 describe("get_random_phone_number", () => {
   afterEach(() => {
