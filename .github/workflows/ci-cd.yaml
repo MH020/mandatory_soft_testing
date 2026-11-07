@@ -34,7 +34,7 @@ jobs:
         run: npm run test
 
       - name: Start testing database
-        run: docker compose -f docker-ci-cd-compose up -d --wait
+        run: docker compose -f docker-ci-cd-compose.yaml up -d --wait
 
       - name: Run migrations
         run: npx drizzle-kit migrate
@@ -45,10 +45,6 @@ jobs:
         run: npm run intergration-test
         env:
           DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
-
-      - name: Stop testing database
-        if: always()
-        run: docker compose -f docker-ci-cd-compose down -v
 
   playwright:
     name: Playwright Tests
