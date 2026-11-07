@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: ["main"]
 
-  env:
-    DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
+env:
+  DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
 
 jobs:
   ci:
