@@ -1,12 +1,8 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
-import { door, floor, randomLetters, randomNumberWithUppercaseLetter } from '../../src/service/addresses-service.js';
-
-
-
-
+import { door, floor, randomLetters, randomNumberWithUppercaseLetter } from '../../src/service/address-service.js';
 
 describe("door", () => {
-     afterEach(() => {
+    afterEach(() => {
         jest.restoreAllMocks();
     });
 
@@ -52,18 +48,19 @@ describe("door", () => {
     });
 
 
-  it("return door with letter and number no dash", () => {
-    jest.spyOn(Math, "random")
-      .mockReturnValueOnce(0.8) 
-      .mockReturnValueOnce(0)   
-      .mockReturnValueOnce(0)   
-      .mockReturnValueOnce(0.9); 
+    it("return door with letter and number no dash", () => {
+        jest.spyOn(Math, "random")
+        .mockReturnValueOnce(0.8) 
+        .mockReturnValueOnce(0)   
+        .mockReturnValueOnce(0)   
+        .mockReturnValueOnce(0.9); 
 
-    expect(door()).toBe("q0");
-  });
+        expect(door()).toBe("q0");
+    });
 
 
 });
+
 
 
 describe("floor", () => {
@@ -88,6 +85,7 @@ describe("floor", () => {
     });
 
 });
+
 
 
 describe("randomLetters", () => {

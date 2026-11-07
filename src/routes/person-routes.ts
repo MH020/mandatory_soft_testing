@@ -1,13 +1,13 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { adress } from '../service/addresses-service.js';
+import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
+import { adress } from '../service/address-service.js';
+import { getRandomNameGender, getRandomPhoneNumber} from '../service/person-service.js';
 import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
-import { getRandomPerson } from '../service/person-service.js';
-import { getRandomPhoneNumber } from '../service/person-service.js';
 
 const router: Express = express();
-const peoplelist = readFile(); 
+const peoplelist = readFile();
 
-
+// Returns full person(s)
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
     res.send('TODO!');
@@ -16,15 +16,16 @@ router.get('/person', (req: Request, res: Response) => {
 
 router.get('/name-gender', (req: Request, res: Response) => {
     let persons = peoplelist.persons
-    let person = getRandomPerson(persons)
+    let person = getRandomNameGender(persons);
     res.send(person);
 });
 
 
 router.get('/name-gender-dob', (req: Request, res: Response) => {
     let persons = peoplelist.persons;
-    let person = getRandomPerson(persons);
+    let person = getRandomNameGender(persons);
     let dob = createRandomDateOfBirth();
+
     res.send({
         name: person.name,
         surname: person.surname,
@@ -35,8 +36,11 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
 });
 
 router.get('/cpr', (req: Request, res: Response) => {
-    res.send('TODO!');
+    const dob: Date = createRandomDateOfBirth();
+    const gender: string = getRandomNameGender(peoplelist.persons).gender;
 
+    const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
+    res.send( [{"CPR" : cpr }] );
 });
 
 router.get('/cpr-name-gender', (req: Request, res: Response) => {

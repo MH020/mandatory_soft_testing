@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path'
-import type { people } from '../dtos/person-dto.js';
+import type { People } from '../dtos/person-dto.js';
 import { JsonableValue } from 'ts-jest';
 import { json } from 'stream/consumers';
 
@@ -8,7 +8,7 @@ const filePath = path.resolve(process.cwd(), 'data/person.json');
 
 export function readFile() {
     const data = fs.readFileSync(filePath, "utf8")
-    const people = JSON.parse(data) as people
+    const people = JSON.parse(data) as People
     return people
 }
 
