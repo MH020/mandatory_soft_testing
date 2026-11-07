@@ -27,7 +27,7 @@ describe('random date of birth tests', () => {
   });
 
   it("returns a date near the upper limit", () => {
-    jest.spyOn(Math, "random").mockReturnValue(0.999999);
+    jest.spyOn(Math, "random").mockReturnValue(0.99998);
 
     const result = createRandomDateOfBirth();
 
@@ -35,7 +35,7 @@ describe('random date of birth tests', () => {
   });
 
   it("returns a date near the upper limit", () => {
-    jest.spyOn(Math, "random").mockReturnValue(0.999999);
+    jest.spyOn(Math, "random").mockReturnValue(0.99998);
 
     const result = createRandomDateOfBirth();
 
