@@ -1,6 +1,5 @@
 import { address } from "../dtos/adresse-dto.js";
-import { getPostalcodes } from "../repository/addresse-repository.js";
-
+import { postalCodes } from "../repository/addresse-repository.js";
 
 export function randomLetters(length: number) { 
     const letters = "qwertyuiopåøælkjhgfdsazxcvbnm";
@@ -48,10 +47,9 @@ export function door() {
 
 }
 
-export async function adress(): Promise<address> {
+export function adress(): address {
   const randomNumber = Math.floor(Math.random() * 15) + 1;
-  const postalCodes = await getPostalcodes(); 
-  const randomPostalCode = postalCodes[Math.floor(Math.random() * (await postalCodes).length)];
+  const randomPostalCode = postalCodes[Math.floor(Math.random() * postalCodes.length)];
 
   if (!randomPostalCode) {
     throw new Error("No postal codes available");
