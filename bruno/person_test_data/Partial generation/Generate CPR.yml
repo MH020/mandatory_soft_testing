@@ -8,6 +8,36 @@ http:
   url: "{{SERVER}}/api/cpr"
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status 200", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Contains CPR", function () {
+          const body = res.getBody()
+          expect(body.CPR).to.be.a('string');
+        });
+
+        test("Is 11 chars long", function () {
+          const body = res.getBody()
+          expect(body.CPR.length).to.equal(11);
+        });
+
+        test("is format: xxxxxx-xxxx", function () {
+          const body = res.getBody()
+          expect(body.CPR[6]).to.equal("-")
+        });
+
+        test("test", function () {
+          const body = res.getBody();
+          console.log(body);
+
+          expect(body.CPR[6]).to.equal("-")
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

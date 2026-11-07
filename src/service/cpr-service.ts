@@ -44,7 +44,7 @@ export function generateCprSecretDigits(gender: string) :string{
     let secretDigits: string = '';
 
     for (let i = 0; i < 3; i++) {
-        secretDigits += (Math.random() * 10).toFixed(0).toString();
+        secretDigits +=  Math.floor(Math.random() * 10).toString();
     }
 
     let lastDigit: number = Math.floor( (Math.random() * 10) );
