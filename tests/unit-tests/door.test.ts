@@ -3,8 +3,6 @@ import { door } from '../../src/service/addresses-service.js';
 
 
 
-
-
 describe("randomLetters", () => {
     afterEach(() => {
         jest.restoreAllMocks();
