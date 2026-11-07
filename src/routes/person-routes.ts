@@ -11,7 +11,7 @@ const peoplelist = readFile();
 // Returns full person(s)
 // Todo: add query parameter: ?n=amount
 router.get('/person', async (req: Request, res: Response) => {
-    
+
   const count = Number(req.query.n ?? 1);
 
   const persons = peoplelist.persons;
@@ -19,6 +19,10 @@ router.get('/person', async (req: Request, res: Response) => {
   const createPerson = async () => {
     const person = getRandomNameGender(persons);
     const dob = createRandomDateOfBirth();
+
+    if (count > 100) {
+        return res.status(400).send({ error: 'n must be beween 1 and 100' });
+    }
 
     return {
       CPR: generateCprNumberFromDobAndGender(dob, person.gender),
