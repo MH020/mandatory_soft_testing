@@ -1,4 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
+import { adress } from '../service/adresses-servoce.js';
 
 const router: Express = express();
 
@@ -46,7 +47,7 @@ router.get('/phone', (req: Request, res: Response) => {
 
 
 router.get('/address', (req: Request, res: Response) => {
-    res.send('TODO!');
+    res.send(adress());
 
 });
 
