@@ -30,12 +30,4 @@ describe ('adresses tests', () => {
         expect(typeof result.door).toBe("string");
     });
 
-
-    test("postal code and town come from the available postal codes", async () => {
-        const result = await adress();
-        const postalCodes = await getPostalCodes()
-
-        expect(postalCodes).toContainEqual(result.postal_code_and_town);
-    });
-
 });

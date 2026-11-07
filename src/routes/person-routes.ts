@@ -1,8 +1,9 @@
 import express, { type Express, type Request, type Response } from 'express';
-import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
-import { adress } from '../service/address-service.js';
-import { getRandomNameGender, getRandomPhoneNumber} from '../service/person-service.js';
+import { getRandomNameGender, getRandomPerson, getRandomPhoneNumber } from '../service/person-service.js';
+import { NameGenderToPersonDTO } from '../dtos/person-dto.js';
 import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
+import { generateCprNumberFromDobAndGender } from '../service/cpr-service.js';
+import { adress } from '../service/address-service.js';
 
 const router: Express = express();
 const peoplelist = readFile();
@@ -16,8 +17,9 @@ router.get('/person', (req: Request, res: Response) => {
 
 router.get('/name-gender', (req: Request, res: Response) => {
     let persons = peoplelist.persons
-    let person = getRandomNameGender(persons);
-    res.send(person);
+    let person = getRandomPerson(persons)!
+    
+    res.send(NameGenderToPersonDTO(person));
 });
 
 
@@ -27,10 +29,10 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
     let dob = createRandomDateOfBirth();
 
     res.send({
-        name: person.name,
-        surname: person.surname,
+        firstName: person.name,
+        lastName: person.surname,
         gender: person.gender,
-        dateOfBirth: makeIntoIsodateString(dob)
+        birthDate: makeIntoIsodateString(dob)
     });
 
 });
@@ -57,12 +59,16 @@ router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
 
 router.get('/phone', (req: Request, res: Response) => {
     const phoneNumber = getRandomPhoneNumber();
-    res.send(phoneNumber);
+    res.send({phoneNumber});
 });
 
 
-router.get('/address', (req: Request, res: Response) => {
-    res.send(adress());
+router.get('/address', async (req: Request, res: Response) => {
+    const address = await adress();
+
+    res.send({
+        address: address  
+    });
 
 });
 
