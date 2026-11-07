@@ -1,20 +1,23 @@
 import express, { type Express, type Request, type Response } from 'express';
 import {generateCprNumberFromDobAndGender} from '../service/cpr-service.js'
 import { adress } from '../service/address-service.js';
+import { getRandomNameGender } from '../service/person-service.js';
+import readFile from '../repository/person-repository.js';
 
 const router: Express = express();
+const peoplelist = readFile();
 
 // Returns full person(s)
 // Todo: add query parameter: ?n=amount
 router.get('/person', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    res.send("TODO!");
 });
 
 
 router.get('/name-gender', (req: Request, res: Response) => {
-    res.send('TODO!');
-
+    let persons = peoplelist.persons
+    let person = getRandomNameGender(persons)
+    res.send(person);
 });
 
 

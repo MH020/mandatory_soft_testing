@@ -2,7 +2,7 @@ import { NameGender } from "../dtos/person-dto.js";
 
 
 // return random name and gender
-export function getRandomNameGender(nameGenderList: Array<NameGender>) {
-    return nameGenderList[Math.floor(Math.random() * nameGenderList.length)];
+export function getRandomNameGender(peoplelist: Array<NameGender>) {
+    return peoplelist[Math.floor(Math.random() * peoplelist.length)];
 }
 

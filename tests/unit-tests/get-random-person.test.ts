@@ -21,7 +21,7 @@ const people = [
     },
     ] as NameGender[]
 
-describe("get_random_person", () => {
+describe("getRandomPerson", () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
