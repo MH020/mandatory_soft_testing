@@ -1,5 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { adress } from '../service/adresses-servoce.js';
+import { adress } from '../service/addresses-service.js';
 
 const router: Express = express();
 

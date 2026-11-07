@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest, test } from '@jest/globals';
-import { door } from '../../src/service/adresses-servoce.js';
+import { door } from '../../src/service/addresses-service.js';
 
 
 
