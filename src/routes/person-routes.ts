@@ -40,7 +40,7 @@ router.get('/cpr', (req: Request, res: Response) => {
     const gender: string = getRandomNameGender(peoplelist.persons).gender;
 
     const cpr: string = generateCprNumberFromDobAndGender(dob, gender);
-    res.send( [cpr] );
+    res.send( [{"CPR" : cpr }] );
 });
 
 router.get('/cpr-name-gender', (req: Request, res: Response) => {
