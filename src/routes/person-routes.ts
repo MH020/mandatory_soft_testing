@@ -10,8 +10,23 @@ const peoplelist = readFile();
 
 // Returns full person(s)
 // Todo: add query parameter: ?n=amount
-router.get('/person', (req: Request, res: Response) => {
-    res.send('TODO!');
+router.get('/person', async (req: Request, res: Response) => {
+    const  persons = peoplelist.persons;
+    const  person = getRandomNameGender(persons);
+    const  dob = createRandomDateOfBirth();
+    const cpr: string = generateCprNumberFromDobAndGender(dob, person.gender);
+    const phoneNumber = getRandomPhoneNumber();
+    const address = await adress();
+
+    res.send({
+        CPR: cpr,
+        firstName: person.name,
+        lastName: person.surname,
+        gender: person.gender,
+        birthDate: makeIntoIsodateString(dob),
+        phoneNumber: phoneNumber,
+        address: address  
+    });
 });
 
 
