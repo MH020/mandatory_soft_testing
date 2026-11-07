@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { person } from '../../src/dtos/person-dto.js';
+import { NameGender } from '../../src/dtos/person-dto.js';
 import { getRandomPerson } from '../../src/service/person-service.js';
 
 
@@ -21,7 +21,7 @@ const people = [
     "surname": "Jespersen",
     "gender": "female"
     },
-    ] as person[]
+    ] as NameGender[]
 
 describe("getRandomPerson", () => {
   afterEach(() => {

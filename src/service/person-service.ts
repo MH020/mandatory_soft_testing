@@ -1,5 +1,5 @@
-import type { person } from "../dtos/person-dto.js";
+import type { NameGender } from "../dtos/person-dto.js";
 
-export function getRandomPerson(peoplelist: Array<person>) {
+export function getRandomPerson(peoplelist: Array<NameGender>) {
     return peoplelist[Math.floor(Math.random() * peoplelist.length)];
 }

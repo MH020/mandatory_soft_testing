@@ -2,6 +2,7 @@ import express, { type Express, type Request, type Response } from 'express';
 import { adress } from '../service/addresses-service.js';
 import readFile from '../repository/person-repository.js';
 import { getRandomPerson } from '../service/person-service.js';
+import { PersonDTO } from '../dtos/person-dto.js';
 
 const router: Express = express();
 const peoplelist = readFile(); 
@@ -14,8 +15,14 @@ router.get('/person', (req: Request, res: Response) => {
 
 
 router.get('/name-gender', (req: Request, res: Response) => {
+    /*
     let persons = peoplelist.persons
     let person = getRandomPerson(persons)
+*/
+    let personDto: PersonDTO = {
+        
+    } 
+
     res.send(person);
 });
 
