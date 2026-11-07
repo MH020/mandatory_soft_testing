@@ -16,17 +16,20 @@ export function readFile() {
 const start = Date.UTC(1868, 0, 1);
 
 export function createRandomDateOfBirth() {
+    // Get today's date in UTC format
     const now = new Date(Date.now());
-
     const today = Date.UTC(
         now.getFullYear(),
         now.getMonth(),
         now.getDate()
     );
 
+    // Find a random date between the start date and today
+    // Using formular: (differnce between max and min) * (random from [0, 1[) + min)
     let daysDiferance = (today - start) * Math.random() + start; 
-
     const randomDay = new Date(daysDiferance);
+
+    // Return only the day, month and year, without hours, minutes and seconds etc.
     return new Date(Date.UTC(randomDay.getFullYear(), randomDay.getMonth(), randomDay.getDate()));
 
 }
