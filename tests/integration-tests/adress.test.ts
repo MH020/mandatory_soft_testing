@@ -35,7 +35,7 @@ describe ('adresses tests', () => {
     test("postal code and town come from the available postal codes", () => {
         const result = adress();
 
-        expect(postalCodes).toContainEqual(result.postal_code_and_town);
+        expect(postalCodes).toContainEqual(result.postal_code);
     });
 
 });

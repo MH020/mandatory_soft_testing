@@ -51,7 +51,11 @@ router.get('/phone', (req: Request, res: Response) => {
 
 
 router.get('/address', (req: Request, res: Response) => {
-    res.send(adress());
+    const address = adress();
+     
+    res.send({
+        address: address  
+    });
 
 });
 
