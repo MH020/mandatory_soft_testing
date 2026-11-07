@@ -11,7 +11,7 @@ export interface NameGender {
 export interface PersonDTO {
     CPR?: string,
     firstName?: string,
-    lastNameValue?: string,
+    lastName?: string,
     gender?: string,
     birthDate?: string,
     address?: string,
@@ -22,7 +22,7 @@ export interface PersonDTO {
 export function NameGenderToPersonDTO(person:NameGender) {
        return {
         firstName: person.name,
-        lastNameValue: person.surname,
+        lastName: person.surname,
         gender: person.gender,
     };
 }
