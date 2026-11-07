@@ -6,7 +6,7 @@ import { door, floor, randomLetters, randomNumberWithUppercaseLetter } from '../
 
 
 describe("door", () => {
-    afterEach(() => {
+     afterEach(() => {
         jest.restoreAllMocks();
     });
 
