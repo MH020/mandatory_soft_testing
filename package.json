@@ -16,7 +16,8 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./dist/src/app.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit-tests",
+    "intergration-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration-tests",
     "eslint": "npx eslint"
   },
   "dependencies": {

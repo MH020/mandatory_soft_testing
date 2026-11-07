@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import type { person } from '../src/dtos/person-dto.js';
-import { getRandomPerson } from '../src/service/person-service.js';
+import { person } from '../../src/dtos/person-dto.js';
+import { getRandomPerson } from '../../src/service/person-service.js';
+
 
 
 const people = [
@@ -22,7 +23,7 @@ const people = [
     },
     ] as person[]
 
-describe("get_random_person", () => {
+describe("getRandomPerson", () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
