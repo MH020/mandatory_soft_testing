@@ -45,6 +45,8 @@ router.get('/cpr', (req: Request, res: Response) => {
     res.send( {"CPR" : cpr } );
 });
 
+    
+
 router.get('/cpr-name-gender', (req: Request, res: Response) => {
     const dob: Date = createRandomDateOfBirth();
     const person = getRandomNameGender(peoplelist.persons);
@@ -58,7 +60,6 @@ router.get('/cpr-name-gender', (req: Request, res: Response) => {
     });
 
 });
-
 
 
 router.get('/cpr-name-gender-dob', (req: Request, res: Response) => {
