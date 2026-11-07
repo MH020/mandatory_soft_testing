@@ -8,10 +8,9 @@ export interface address {
     number: String, 
     floor: String, 
     door: String, 
-    postal_code_and_town: postalCode
+    postal_code: String
+    town_name: String | null
 }
-
-
 
 
 

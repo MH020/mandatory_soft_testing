@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path'
-import type { People } from '../dtos/person-dto.js';
-import { JsonableValue } from 'ts-jest';
-import { json } from 'stream/consumers';
+import { People } from '../dtos/person-dto.js';
+
+
 
 const filePath = path.resolve(process.cwd(), 'data/person.json');
 

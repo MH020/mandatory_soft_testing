@@ -61,6 +61,7 @@ export async function adress(): Promise<address> {
     number: randomNumberWithUppercaseLetter(),
     floor: floor(),
     door: door(),
-    postal_code_and_town: randomPostalCode,
+    postal_code: randomPostalCode.post_code,
+    town_name: randomPostalCode.city_name
   };
 }
