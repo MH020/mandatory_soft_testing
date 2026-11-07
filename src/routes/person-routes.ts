@@ -29,10 +29,10 @@ router.get('/name-gender-dob', (req: Request, res: Response) => {
     let dob = createRandomDateOfBirth();
 
     res.send({
-        name: person.name,
-        surname: person.surname,
+        firstName: person.name,
+        lastName: person.surname,
         gender: person.gender,
-        dateOfBirth: makeIntoIsodateString(dob)
+        birthDate: makeIntoIsodateString(dob)
     });
 
 });
