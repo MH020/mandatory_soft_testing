@@ -38,13 +38,15 @@ jobs:
 
       - name: Run migrations
         run: npx drizzle-kit migrate
-        env:
-          DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
 
       - name: Run integration tests
         run: npm run intergration-test
-        env:
-          DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
+
+      - name: Run Bruno API tests
+        working-directory: bruno/person_test_data
+        run: |
+          npm install --global @usebruno/cli
+          bru run --env local
 
   playwright:
     name: Playwright Tests

@@ -6,6 +6,7 @@ pkgs.mkShell {
     yarn
     typescript
     postgresql
+    bruno-cli
   ];
 
   shellHook = ''
