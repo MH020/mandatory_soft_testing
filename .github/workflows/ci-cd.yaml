@@ -41,6 +41,9 @@ jobs:
 
       - name: Run integration tests
         run: npm run intergration-test
+      
+      - name: Run integration tests
+        run: npm start
 
       - name: Run Bruno API tests
         working-directory: bruno/person_test_data
