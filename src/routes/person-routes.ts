@@ -1,5 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { getRandomNameGender, getRandomPerson, getRandomPhoneNumber } from '../service/person-service.js';
+import { getRandomNameGender, getRandomPhoneNumber } from '../service/person-service.js';
 import { NameGenderToPersonDTO, PersonDTO } from '../dtos/person-dto.js';
 import { createRandomDateOfBirth, makeIntoIsodateString, readFile } from '../repository/person-repository.js';
 import { generateCprNumberFromDobAndGender } from '../service/cpr-service.js';
@@ -51,7 +51,7 @@ router.get('/person', async (req: Request, res: Response) => {
 
 router.get('/name-gender', (req: Request, res: Response) => {
     let persons = peoplelist.persons
-    let person = getRandomPerson(persons)!
+    let person = getRandomNameGender(persons)
     
     res.send(NameGenderToPersonDTO(person));
 });
