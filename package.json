@@ -18,6 +18,7 @@
     "start": "tsc && node ./dist/src/app.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit-tests",
     "intergration-test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration-tests",
+    "test-coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit-tests tests/integration-tests --coverage",
     "eslint": "npx eslint"
   },
   "dependencies": {
