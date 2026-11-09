@@ -12,9 +12,10 @@ const peoplelist = readFile();
 // Todo: add query parameter: ?n=amount
 router.get('/person', async (req: Request, res: Response) => {
 
-    const count = Number(req.query.n ?? 1);
+    const query = Number(req.query.n ?? 1);
+    const count = Math.max(1, query);
 
-    if (count > 100) {
+    if (!Number.isInteger(count) || count > 100) {
         return res.status(400).send({ error: 'n must be beween 1 and 100' });
     }
 
