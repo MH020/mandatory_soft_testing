@@ -5,10 +5,10 @@ info:
 
 http:
   method: GET
-  url: "{{SERVER}}/api/person/?n=amount"
+  url: "{{SERVER}}/api/person/?n=0"
   params:
     - name: n
-      value: amount
+      value: "0"
       type: query
   auth: inherit
 
