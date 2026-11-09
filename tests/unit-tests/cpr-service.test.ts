@@ -69,26 +69,26 @@ describe('Convert DOB to DDMMYY format', () => {
         const dob = new Date( Date.parse("1. jan, 1999") );
         const gender = "male";
         jest.spyOn(Math, "random")
-            .mockReturnValueOnce(1) 
-            .mockReturnValueOnce(2)   
-            .mockReturnValueOnce(3)   
-            .mockReturnValueOnce(4);
+            .mockReturnValueOnce(0) 
+            .mockReturnValueOnce(.1)   
+            .mockReturnValueOnce(.2)   
+            .mockReturnValueOnce(.3);
 
         const cpr = generateCprNumberFromDobAndGender(dob, gender);
-        expect(cpr).toBe("010199-1235");
+        expect(cpr).toBe("010199-0123");
     });
     
     test("Female cpr test", () => {
         const dob = new Date( Date.parse("1. jan, 1999") );
         const gender = "female";
         jest.spyOn(Math, "random")
-            .mockReturnValueOnce(1) 
-            .mockReturnValueOnce(2)   
-            .mockReturnValueOnce(3)   
-            .mockReturnValueOnce(4);
+            .mockReturnValueOnce(0) 
+            .mockReturnValueOnce(.1)   
+            .mockReturnValueOnce(.2)   
+            .mockReturnValueOnce(.3);
 
         const cpr = generateCprNumberFromDobAndGender(dob, gender);
-        expect(cpr).toBe("010199-1234");
+        expect(cpr).toBe("010199-0122");
     });
 });
 
