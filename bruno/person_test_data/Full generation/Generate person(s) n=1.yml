@@ -1,7 +1,7 @@
 info:
   name: Generate person(s) n=1
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: GET
