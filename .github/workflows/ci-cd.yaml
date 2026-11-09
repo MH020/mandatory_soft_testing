@@ -38,13 +38,9 @@ jobs:
 
       - name: Run migrations
         run: npx drizzle-kit migrate
-        env:
-          DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
 
       - name: Run integration tests
         run: npm run intergration-test
-        env:
-          DATABASE_URL: postgres://postgres:secret@localhost:5432/addresses
 
   playwright:
     name: Playwright Tests
@@ -61,6 +57,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Start testing database
+        run: docker compose -f docker-ci-cd-compose.yaml up -d --wait
+
+      - name: Run migrations
+        run: npx drizzle-kit migrate
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
