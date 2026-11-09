@@ -17,7 +17,7 @@ runtime:
         });
 
         test("Get an 8 digit number", function () {
-          expect(res.getBody().toString().length).to.equal(8);
+          expect(res.getBody().phoneNumber.toString()).to.have.lengthOf(8);
         });
 
 settings:
@@ -25,3 +25,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
