@@ -31,7 +31,8 @@ to fix mege conflicts with package you can just reinstall it:
 
 ## normal testing
 unit tests: ```$ npm run test``` \
-intergration tests: ```$ npm run intergration-test``` 
+intergration tests: ```$ npm run intergration-test``` \
+unit and integration test coverage: ```$ npm run test-coverage``` 
 
 ## End to end
 We use Playwright for end to end tests. Specs are found in /e2e
