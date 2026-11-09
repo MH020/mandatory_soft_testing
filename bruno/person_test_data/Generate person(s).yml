@@ -12,6 +12,14 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("n=0 returns one person", function () {
+          expect(res.getBody()).to.be.an("object");
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
