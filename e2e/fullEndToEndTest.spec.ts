@@ -74,20 +74,56 @@ test('Full end to end test', async ({ page }) => {
     await expect(page.locator('.personCard')).toHaveCount(1);
 
     // all elements have 1 class if they are showing, and 2 classes if they are not showing (the second class is "hidden")
-    expect(await page.locator('.firstName').evaluate(el => el.classList.length)).toBe(elements.name ? 1 : 2);
-    expect(await page.locator('.firstNameValue').evaluate(el => el.classList.length)).toBe(elements.name ? 1 : 2);
-    expect(await page.locator('.lastName').evaluate(el => el.classList.length)).toBe(elements.name ? 1 : 2);
-    expect(await page.locator('.lastNameValue').evaluate(el => el.classList.length)).toBe(elements.name ? 1 : 2);
+    if (elements.name)
+    {
+      await expect(page.locator('.firstName')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.firstNameValue')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.lastName')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.lastNameValue')).not.toHaveClass(/hidden/);
+    } else 
+    {
+      await expect(page.locator('.firstName')).toHaveClass(/hidden/);
+      await expect(page.locator('.firstNameValue')).toHaveClass(/hidden/);
+      await expect(page.locator('.lastName')).toHaveClass(/hidden/);
+      await expect(page.locator('.lastNameValue')).toHaveClass(/hidden/);
+    }
+
+    if (elements.gender)
+    {
+      await expect(page.locator('.gender')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.genderValue')).not.toHaveClass(/hidden/);
+    } else 
+    {
+      await expect(page.locator('.gender')).toHaveClass(/hidden/);
+      await expect(page.locator('.genderValue')).toHaveClass(/hidden/);
+    }
+
+    if (elements.birthdate)
+    {
+      await expect(page.locator('.dob')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.dobValue')).not.toHaveClass(/hidden/);
+    } else 
+    {
+      await expect(page.locator('.dob')).toHaveClass(/hidden/);
+      await expect(page.locator('.dobValue')).toHaveClass(/hidden/);
+    }
+
+    if (elements.address)
+    {
+      await expect(page.locator('.address')).not.toHaveClass(/hidden/);
+    } else 
+    {
+      await expect(page.locator('.address')).toHaveClass(/hidden/);
+    }
     
-    expect(await page.locator('.gender').evaluate(el => el.classList.length)).toBe(elements.gender ? 1 : 2);
-    expect(await page.locator('.genderValue').evaluate(el => el.classList.length)).toBe(elements.gender ? 1 : 2);
-    
-    expect(await page.locator('.dob').evaluate(el => el.classList.length)).toBe(elements.birthdate ? 1 : 2);
-    expect(await page.locator('.dobValue').evaluate(el => el.classList.length)).toBe(elements.birthdate ? 1 : 2);
-    
-    expect(await page.locator('.address').evaluate(el => el.classList.length)).toBe(elements.address ? 1 : 2);
-    
-    expect(await page.locator('.cpr').evaluate(el => el.classList.length)).toBe(elements.cpr ? 1 : 2);
-    expect(await page.locator('.cprValue').evaluate(el => el.classList.length)).toBe(elements.cpr ? 1 : 2);
+    if (elements.cpr)
+    {
+      await expect(page.locator('.cpr')).not.toHaveClass(/hidden/);
+      await expect(page.locator('.cprValue')).not.toHaveClass(/hidden/);
+    } else 
+    {
+      await expect(page.locator('.cpr')).toHaveClass(/hidden/);
+      await expect(page.locator('.cprValue')).toHaveClass(/hidden/);
+    }
   }
 });
